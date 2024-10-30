@@ -1,12 +1,12 @@
 import {DataTypes} from 'sequelize';
-import sequelize from '../database-config/data-base'
+import {sequelize} from '../database-config/data-base.js'
 
 
 const User = sequelize.define('User', {
   username: { type: DataTypes.STRING, unique: true, allowNull: false },
   email: { type: DataTypes.STRING, unique: true, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
-  profilePic: { type: DataTypes.STRING },
+  profilePic: { type: DataTypes.BLOB },
 });
 
-module.exports = User;
+export default User;
