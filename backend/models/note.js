@@ -1,6 +1,6 @@
 // DataBase Configuration
 import { DataTypes } from 'sequelize';
-import sequelize from '../database-config/data-base';
+import {sequelize} from '../database-config/data-base.js';
 
 const Note = sequelize.define('Note', {
   title: { type: DataTypes.STRING, allowNull: false },
