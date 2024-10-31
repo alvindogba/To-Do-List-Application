@@ -3,6 +3,9 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Box, Avatar, TextField, InputAdornment } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import '../styles/dashboard.css';
+import '../styles/sidebar.css';
+import '../styles/style.css';
 
 
 const Header = ({ toggleSidebar, onSearch }) => {

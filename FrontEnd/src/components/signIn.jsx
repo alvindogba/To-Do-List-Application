@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 import api from '../services/api.js';
 import { useNavigate } from 'react-router-dom'; // Ensure you have react-router-dom installed
+import '../styles/dashboard.css';
+import '../styles/sidebar.css';
+import '../styles/style.css';
 
 function SignIn() {
   const [formData, setFormData] = useState({

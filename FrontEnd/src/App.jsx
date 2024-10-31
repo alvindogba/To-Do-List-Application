@@ -5,6 +5,9 @@ import Auth from './components/Auth';
 import CreateNote from './components/CreateNote';
 import SignIn from './components/signIn';
 import Dashboard from './components/Dashboard';
+import './styles/dashboard.css';
+import './styles/sidebar.css';
+import './styles/style.css';
 
 function App() {
   return (

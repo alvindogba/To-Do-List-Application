@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { Box, Tabs, Tab, Typography } from '@mui/material';
 import SignUp from './SignUp';
 import SignIn from './signIn';
+import '../styles/dashboard.css';
+import '../styles/sidebar.css';
+import '../styles/style.css';
 
 function Auth() {
   const [activeTab, setActiveTab] = useState(0);

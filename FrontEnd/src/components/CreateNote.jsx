@@ -5,6 +5,9 @@ import api from '../services/api';
 import Header from './header';
 import Sidebar from './sidebar';
 import { useNavigate } from 'react-router-dom';
+import '../styles/dashboard.css';
+import '../styles/sidebar.css';
+import '../styles/style.css';
 
 function CreateNote() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
