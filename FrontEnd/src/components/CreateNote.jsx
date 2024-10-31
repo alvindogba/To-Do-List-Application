@@ -1,15 +1,24 @@
 // src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Paper, Typography, TextField, Button, Box } from '@mui/material';
+import { Container, Grid, Paper, Typography, TextField, Button, Box, CssBaseline} from '@mui/material';
 import api from '../services/api';
+import Header from './header';
+import Sidebar from './sidebar';
+import { useNavigate } from 'react-router-dom';
 
 function CreateNote() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+      setIsSidebarOpen((prev) => !prev);
+  };
   const [newNote, setNewNote] = useState({
     title: '',
     content: '',
     deadline: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();  // Initialize navigat
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,9 +33,11 @@ function CreateNote() {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Ensure token is included
         }
+   
       } );
       console.log('Note created successfully:', response.data); // Log response to confirm successful creation
       setNewNote({ title: '', content: '', deadline: '' }); // Reset form fields
+      navigate('/dashboard');  // Redirect to the dashboard route
     } catch (error) {
       console.error('Error creating note:', error);
       setErrorMessage('Failed to create note. Please try again.');
@@ -34,13 +45,14 @@ function CreateNote() {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Dashboard
-      </Typography>
 
+    <Container>
+  
+      <CssBaseline/>
+      <Header toggleSidebar={toggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       {/* New Note Form */}
-      <Box component="form" onSubmit={handleNoteSubmit} sx={{ mb: 4 }}>
+      <Box  component="form" onSubmit={handleNoteSubmit} sx={{height: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", gap: "1rem"}}>
         <Typography variant="h6">Create New Note</Typography>
         {errorMessage && <Typography color="error">{errorMessage}</Typography>}
         
@@ -79,8 +91,8 @@ function CreateNote() {
         </Button>
       </Box>
 
-     
-    </Container>
+    
+    </Container> 
   );
 }
 

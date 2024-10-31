@@ -20,16 +20,7 @@ const Header = ({ toggleSidebar, onSearch }) => {
                     <MenuIcon />
                 </IconButton>
                 
-                {/* Logo */}
-                <Box
-                    component="img"
-                    src=""
-                    alt="Logo"
-                    sx={{
-                        height: 40,
-                        marginRight: 2,
-                    }}
-                />
+        
 
                 {/* Dashboard Title */}
                 <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
