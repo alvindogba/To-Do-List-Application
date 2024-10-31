@@ -1,31 +1,31 @@
-// src/components/Dashboard.js
-import React, { useEffect, useState } from 'react';
-import { Container, Grid, Paper, Typography } from '@mui/material';
-import axios from 'axios';
+// Dashboard.js
+import React, { useState } from 'react';
+import Header from './header';
+import Sidebar from './sidebar';
+import { Box, CssBaseline } from '@mui/material';
 
-function Dashboard() {
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    // Fetch data from the backend
-    axios.get('/api/data')
-      .then(response => setData(response.data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+const Dashboard = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  return (
-    <Container>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Dashboard
-      </Typography>
-      <Grid container spacing={3}>
-        
-         
-   
-      </Grid>
+    const toggleSidebar = () => {
+        setIsSidebarOpen((prev) => !prev);
+    };
 
-    </Container>
-  );
-}
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <Header toggleSidebar={toggleSidebar} />
+            <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+            <Box className='main-container' component="main" sx={{ flexGrow: 1 }}>
+                <div className='section_1'>
+                  <h2>Welcome to the Dashboard</h2>
+                  
+                </div>
+              
+            </Box>
+        </Box>
+    );
+};
 
 export default Dashboard;

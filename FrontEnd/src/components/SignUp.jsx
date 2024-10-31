@@ -18,20 +18,7 @@ function SignUp() {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
       const file = files[0];
-      // Validate file type and size
-      if (file) {
-        const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-        if (!validTypes.includes(file.type)) {
-          setErrorMessage('Invalid file type. Please upload an image (jpg, png, gif).');
-          return;
-        }
-        if (file.size > 5 * 1024 * 1024) { // Limit size to 5MB
-          setErrorMessage('File size exceeds 5MB. Please upload a smaller image.');
-          return;
-        }
-        setErrorMessage(''); // Clear error if file is valid
-        setFormData({ ...formData, [name]: file });
-      }
+      setFormData({ ...formData, profilePic: file });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -41,7 +28,6 @@ function SignUp() {
     e.preventDefault();
     setLoading(true); // Start loading
     setErrorMessage(''); // Clear previous errors
-
     const formDataToSend = new FormData();
     formDataToSend.append('username', formData.username);
     formDataToSend.append('email', formData.email);
@@ -49,12 +35,11 @@ function SignUp() {
     formDataToSend.append('profilePic', formData.profilePic);
 
     try {
-      const response = await api.post('api/auth/signup', formDataToSend, {
+      const response = await api.post('/api/auth/signup', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('Signup successful!');
       console.log(response.data);
       navigate('/signin'); // Redirect to Sign In page
     } catch (error) {
@@ -117,7 +102,14 @@ function SignUp() {
         fullWidth
         sx={{ backgroundColor: "white" }}
       />
-      <input type="file" name="profilePic" onChange={handleChange} required style={{ marginTop: 16 }} />
+      <input
+        type="file"
+        name="profilePic"
+        accept="image/*" // Ensure only images can be selected
+        onChange={handleChange}
+        required
+        style={{ marginTop: 16 }}
+      />
       <Button type="submit" variant="contained" color="primary" fullWidth disabled={loading}>
         {loading ? <CircularProgress size={24} /> : 'Sign Up'}
       </Button>
