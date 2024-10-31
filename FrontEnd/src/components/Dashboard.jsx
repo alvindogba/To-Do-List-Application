@@ -4,6 +4,7 @@ import Header from './header';
 import Sidebar from './sidebar';
 import { Box, CssBaseline, Typography, Card, CardContent, CardActions, Button, Grid } from '@mui/material';
 import api from '../services/api';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -68,7 +69,12 @@ const Dashboard = () => {
                                     </Grid>
                                 ))
                             ) : (
-                                <Typography>No notes found.</Typography>
+                                <>
+                                 <Typography>No notes found. </Typography>
+                                <Button component={Link} to="/newNote">Create New Note</Button>
+                                </>
+                               
+
                             )}
                         </Grid>
                     </Box>
