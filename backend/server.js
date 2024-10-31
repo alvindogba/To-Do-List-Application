@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: 'https://to-do-list-application-0snn.onrender.com' }));
 app.use(express.json()); // Parse JSON requests
 app.use('/api', router); // All routes prefixed with /api
 app.use('/uploads', express.static('uploads')); // Serve files from the uploads directory
