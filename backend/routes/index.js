@@ -17,6 +17,5 @@ router.put('/notes/:id', authenticate, updateNote); // Protected: only authentic
 router.delete('/notes/:id', authenticate, deleteNote); // Protected: only authenticated users can delete notes
 
 
-//Dashboard
-router.get('./dashboard ')
+
 export default router;

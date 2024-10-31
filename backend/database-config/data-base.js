@@ -1,9 +1,15 @@
 // database-config/data-base.js
 import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
 
-const sequelize = new Sequelize('to-dolist', 'postgres', '03399truth', {
-  host: 'localhost',
+// Load environment variables from .env file
+dotenv.config();
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
   dialect: 'postgres',
+  // Optional settings can be added here if needed
+  logging: false, // Disable logging or set to console.log for detailed logs
 });
 
 export const connectDB = async () => {

@@ -3,6 +3,8 @@ import express from 'express';
 import cors from 'cors';
 import { connectDB } from './database-config/data-base.js'; // Import connectDB
 import router from './routes/index.js';
+import dotenv  from 'dotenv'
+dotenv.config();
 
 const app = express();
 
@@ -19,5 +21,5 @@ connectDB();
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on ${PORT}`);
 });
