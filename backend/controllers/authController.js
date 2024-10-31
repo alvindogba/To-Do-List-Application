@@ -7,8 +7,7 @@ dotenv.config();
 
 const signup = async (req, res) => {
   try {
-    // Extract user details from the request
-    console.log(req.body)
+  
     const { username, email, password } = req.body;
     const profilePic = req.file ? req.file.buffer : null; // Access the profilePic from multer
     console.log( profilePic)
