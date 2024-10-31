@@ -1,0 +1,6 @@
+.side-bar-list-container{
+    margin-top: 7em !important;
+    height: 100%;
+    scroll-behavior: smooth;
+    scrollbar-width: 4em;
+}

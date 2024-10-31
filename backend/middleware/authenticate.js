@@ -4,18 +4,24 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const authenticate = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
+  const authHeader = req.header('Authorization');
 
-  if (!token) {
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: 'Access denied. No token provided or invalid format.' });
   }
+
+  const token = authHeader.replace('Bearer ', '');
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+
+    req.user =  decoded; // Attach only the user ID for simplicity and security
     next();
   } catch (error) {
-    res.status(400).json({ message: 'Invalid token.' });
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ message: 'Access denied. Token has expired.' });
+    }
+    return res.status(401).json({ message: 'Access denied. Invalid token.' });
   }
 };
 

@@ -2,8 +2,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Auth from './components/Auth';
-import Dashboard from './components/Dashboard';
+import CreateNote from './components/CreateNote';
 import SignIn from './components/signIn';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
