@@ -5,9 +5,9 @@ import Sidebar from './sidebar';
 import { Box, CssBaseline, Typography, Card, CardContent, CardActions, Button, Grid } from '@mui/material';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
-import '../styles/dashboard.css';
-import '../styles/sidebar.css';
-import '../styles/style.css';
+import '../Styles/dashboard.css';
+import '../Styles/sidebar.css';
+import '../Styles/style.css';
 
 const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);

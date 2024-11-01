@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 import api from '../services/api';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../styles/dashboard.css';
-import '../styles/sidebar.css';
-import '../styles/style.css';
+import '../Styles/dashboard.css';
+import '../Styles/sidebar.css';
+import '../Styles/style.css';
 
 
 
