@@ -28,7 +28,7 @@ function SignIn() {
     try {
       
       const response = await api.post('/api/auth/login', formData); // Adjust the endpoint according to your API
-      alert('Login successful!'); // Optionally display a success message
+      
 
       // Assuming your API responds with a token
       localStorage.setItem('token', response.data.token); // Store the token for future requests

@@ -7,9 +7,9 @@ import dotenv  from 'dotenv'
 dotenv.config();
 
 const app = express();
-
+const taskUrl=process.env.TASKURL;
 // Middleware
-app.use(cors({ origin: 'https://to-do-list-application-0snn.onrender.com' }));
+app.use(cors({ origin: taskUrl }));
 app.use(express.json()); // Parse JSON requests
 app.use('/api', router); // All routes prefixed with /api
 app.use('/uploads', express.static('uploads')); // Serve files from the uploads directory
