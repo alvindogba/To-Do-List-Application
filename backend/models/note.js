@@ -16,10 +16,7 @@ const Note = sequelize.define('note', {
   deadline: { 
     type: DataTypes.DATE, 
     allowNull: true,
-    validate: {
-      isDate: true,
-      isAfter: new Date().toISOString() // Ensures deadline is not in the past
-    }
+   
   },
   userId: { 
     type: DataTypes.INTEGER, 
