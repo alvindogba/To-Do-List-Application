@@ -1,7 +1,7 @@
 // src/components/Dashboard.js
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Paper, Typography, TextField, Button, Box, CssBaseline} from '@mui/material';
-import api from '../services/api';
+import api from '../services/api.js';
 import Header from './header';
 import Sidebar from './sidebar';
 import { useNavigate } from 'react-router-dom';
@@ -35,8 +35,9 @@ function CreateNote() {
       const response = await api.post('/api/notes',  newNote, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`, // Ensure token is included
+          'Content-Type': 'application/json',
         }
-   
+        
       } );
       console.log('Note created successfully:', response.data); // Log response to confirm successful creation
       setNewNote({ title: '', content: '', deadline: '' }); // Reset form fields
