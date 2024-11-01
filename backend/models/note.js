@@ -15,16 +15,23 @@ const Note = sequelize.define('note', {
   },
   deadline: { 
     type: DataTypes.DATE, 
-    allowNull: true 
+    allowNull: true,
+    validate: {
+      isDate: true,
+      isAfter: new Date().toISOString() // Ensures deadline is not in the past
+    }
   },
   userId: { 
     type: DataTypes.INTEGER, 
-    allowNull: true,
-    index: true 
+    allowNull: true
   }
 }, {
-  timestamps: true // Automatically adds createdAt and updatedAt
+  timestamps: true, // Automatically adds createdAt and updatedAt
+  indexes: [
+    {
+      fields: ['userId']
+    }
+  ]
 });
 
 export default Note;
-
