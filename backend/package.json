@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install && cross-env NODE_ENV=production npx sequelize-cli db:migrate",
-    "start": "node ./server.js"
-  },
+"scripts": {
+   "test": "echo \"Error: no test specified\" && exit 1",
+   "build": "npm install && npx sequelize-cli db:migrate",
+   "start": "node ./server.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,8 +23,6 @@
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.5"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3"
   }
+ 
 }
