@@ -4,9 +4,9 @@ import { Drawer, List, ListItem, ListItemText, Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
 import LogoutIcon from '@mui/icons-material/Logout';
-import '../styles/dashboard.css';
-import '../styles/sidebar.css';
-import '../styles/style.css';
+import '../Styles/dashboard.css';
+import '../Styles/sidebar.css';
+import '../Styles/style.css';
 
 
 const Sidebar = ({ isOpen, toggleSidebar }) => (
