@@ -27,8 +27,8 @@ const config = {
     logging: false, // Disable logging in production
     dialectOptions: {
       ssl: {
-        require: true,
-        rejectUnauthorized: false, // For most cloud providers
+        require: true, // Set to true to require SSL
+        rejectUnauthorized: false, // This may be necessary for some providers
       },
     },
   },
