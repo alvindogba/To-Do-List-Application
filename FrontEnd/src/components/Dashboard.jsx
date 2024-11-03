@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './header';
 import Sidebar from './sidebar';
+import EditNoteForm from './EditNote';
 import { Box, CssBaseline, Typography, Card, CardContent, CardActions, Button, Grid } from '@mui/material';
 import api from '../services/api';
 import { Link } from 'react-router-dom';
@@ -13,6 +14,8 @@ const Dashboard = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [notes, setNotes] = useState([]); // Store fetched notes
     const [errorMessage, setErrorMessage] = useState('');
+    const [editMode, setEditMode] = useState(false);
+    const [selectedNote, setSelectedNote] = useState(null);
 
     // Toggle the sidebar open and closed
     const toggleSidebar = () => {
@@ -37,10 +40,43 @@ const Dashboard = () => {
         fetchNotes();
     }, []);
 
+    //DELETE NOTES:
+    async function handleDelete(id) {
+        try {
+            await api.delete(`/api/notes/${id}`);
+            console.log('Note deleted successfully');
+            setNotes(notes.filter(note => note.id !== id)); // Update state to remove the deleted note
+        } catch (error) {
+            console.error('Error deleting note:', error);
+            setErrorMessage('Failed to delete note.');
+        }
+    }
+
+    // Open edit form for a selected note
+    const handleEditClick = (note) => {
+        setSelectedNote(note);
+        setEditMode(true);
+    };
+
+    // Update note in the state after editing
+    const handleSaveEdit = (updatedNote) => {
+        setNotes(notes.map(note => (note.id === updatedNote.id ? updatedNote : note)));
+        setEditMode(false); // Close edit dialog
+    };
+
+    const handleSearch = (query) => {
+        const filteredNotes = notes.filter(note =>
+            note.title.toLowerCase().includes(query.toLowerCase()) ||
+            note.content.toLowerCase().includes(query.toLowerCase())
+        );
+        setNotes(filteredNotes);
+    };
+    
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <Header toggleSidebar={toggleSidebar} />
+           <Header toggleSidebar={toggleSidebar} onSearch={handleSearch} />
+
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <Box className="main-container" component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
                 <div className="section_1">
@@ -58,15 +94,20 @@ const Dashboard = () => {
                                                     {note.title}
                                                 </Typography>
                                                 <Typography variant="body2" color="text.secondary">
-                                                    Deadline: {note.deadline}
+                                                    Deadline: {new Date(note.deadline).toLocaleDateString()}
                                                 </Typography>
                                                 <Typography variant="body1" sx={{ mt: 1 }}>
                                                     {note.content}
                                                 </Typography>
                                             </CardContent>
                                             <CardActions>
-                                                <Button size="small" color="primary">Edit</Button>
-                                                <Button size="small" color="secondary">Delete</Button>
+                                                <Button size="small" color="primary" onClick={() => handleEditClick(note)}>Edit</Button>
+                                                <Button 
+                                                    onClick={() => handleDelete(note.id)}
+                                                    size="small" 
+                                                    color="secondary">
+                                                    Delete
+                                                </Button>
                                             </CardActions>
                                         </Card>
                                     </Grid>
@@ -74,14 +115,22 @@ const Dashboard = () => {
                             ) : (
                                 <>
                                  <Typography>No notes found. </Typography>
-                                <Button component={Link} to="/newNote">Create New Note</Button>
+                                 <Button component={Link} to="/newNote">Create New Note</Button>
                                 </>
-                               
-
                             )}
                         </Grid>
                     </Box>
                 </div>
+
+                {/* Edit Note Form */}
+                {editMode && selectedNote && (
+                    <EditNoteForm
+                        open={editMode}
+                        onClose={() => setEditMode(false)}
+                        note={selectedNote}
+                        onSave={handleSaveEdit}
+                    />
+                )}
             </Box>
         </Box>
     );

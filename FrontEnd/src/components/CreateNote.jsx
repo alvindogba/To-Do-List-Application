@@ -56,7 +56,7 @@ function CreateNote() {
       <Header toggleSidebar={toggleSidebar} />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       {/* New Note Form */}
-      <Box  component="form" onSubmit={handleNoteSubmit} sx={{height: "80vh", display: "flex", flexDirection: "column", justifyContent: "center", gap: "1rem"}}>
+      <Box  component="form" onSubmit={handleNoteSubmit} sx={{height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", gap: "1rem", mt: "8%"}}>
         <Typography variant="h6">Create New Note</Typography>
         {errorMessage && <Typography color="error">{errorMessage}</Typography>}
         

@@ -1,12 +1,12 @@
 // Header.js
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Box, Avatar, TextField, InputAdornment } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import '../Styles/dashboard.css';
 import '../Styles/sidebar.css';
 import '../Styles/style.css';
-
 
 const Header = ({ toggleSidebar, onSearch }) => {
     return (
@@ -22,8 +22,6 @@ const Header = ({ toggleSidebar, onSearch }) => {
                 >
                     <MenuIcon />
                 </IconButton>
-                
-        
 
                 {/* Dashboard Title */}
                 <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
@@ -46,6 +44,11 @@ const Header = ({ toggleSidebar, onSearch }) => {
                     }}
                 />
 
+                {/* Notification Icon */}
+                <IconButton color="inherit">
+                    <NotificationsIcon />
+                </IconButton>
+
                 {/* User Profile Picture */}
                 <Avatar
                     alt="User Profile"
@@ -54,6 +57,7 @@ const Header = ({ toggleSidebar, onSearch }) => {
                         width: 40,
                         height: 40,
                         cursor: 'pointer',
+                        marginLeft: 2
                     }}
                 />
             </Toolbar>
@@ -62,4 +66,3 @@ const Header = ({ toggleSidebar, onSearch }) => {
 };
 
 export default Header;
-
